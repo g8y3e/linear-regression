@@ -10,12 +10,18 @@
 #include "utils.h"
 
 namespace ml_base {
+    /**
+     *
+     */
     LinearRegression::LinearRegression() {
     }
 
     LinearRegression::~LinearRegression() {
     }
 
+    /**
+     * 
+     */
     void LinearRegression::addDataFromFile(std::string data_path) {
         auto data_list = ReadFileFromPath(data_path);
 
