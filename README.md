@@ -2,22 +2,19 @@
 [![License][license-image]][license-url]
 [![Docs][docs-image]][docs-url]
 
-#### Linear regression implementation.
+### Linear regression implementation.
 Implementation of simple machine learning algorithm - linear regression.
-Trying to find linear function:
-```
+##### Trying to find linear function:
+
 ![alt text][hypotesis-image]
-```
 
-Calculate cost function from this equation:
-```
+##### Calculate cost function from this equation:
+
 ![alt text][cost-image]
-```
 
-and minimaze her:
-```
+##### And minimaze her:
+
 ![alt text][minimum-image]
-```
 
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: LICENSE
