@@ -20,7 +20,8 @@ namespace ml_base {
     }
 
     /**
-     * 
+     * Adding data to object from file
+     * @param data_path Path to file with data.
      */
     void LinearRegression::addDataFromFile(std::string data_path) {
         auto data_list = ReadFileFromPath(data_path);
@@ -37,6 +38,11 @@ namespace ml_base {
         }
     }
 
+    /**
+     * Adding data to object from parameters
+     * @param first_data Parameter data.
+     * @param second_data Parameter data.
+     */
     void LinearRegression::addData(double first_data, double second_data) {
         for (auto data_pair : data_) {
             if (data_pair.first == first_data && data_pair.second == second_data) {
@@ -47,6 +53,9 @@ namespace ml_base {
         data_.push_back(std::make_pair(first_data, second_data));
     }
 
+    /**
+     * Calculating linear function
+     */
     void LinearRegression::calculate() {
         double first_param = 0.0;
         double second_param = 0.0;
@@ -109,10 +118,18 @@ namespace ml_base {
         return (sum / static_cast<double>(data_.size()));
     }
 
+    /**
+     * Make an prediction based on second parameter data
+     * @param second_data Parameter data.
+     */
     double LinearRegression::predicFirstData(double second_data) {
         return (second_data - this->first_param_) / this->second_param_;
     }
 
+    /**
+    * Make an prediction based on first parameter data
+    * @param first_data Parameter data.
+    */
     double LinearRegression::predictSecondData(double first_data) {
         return this->first_param_ + this->second_param_ * first_data;
     }
