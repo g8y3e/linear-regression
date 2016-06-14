@@ -74,20 +74,49 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f630a397a38709878f1107ec52f9e0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classml__base_1_1_linear_regression.html#a1f630a397a38709878f1107ec52f9e0d">addDataFromFile</a> (std::string data_path)</td></tr>
 <tr class="separator:a1f630a397a38709878f1107ec52f9e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91003e0402ae0803eba3acab9e7c1501"><td class="memItemLeft" align="right" valign="top"><a id="a91003e0402ae0803eba3acab9e7c1501"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addData</b> (double first_data, double second_data)</td></tr>
+<tr class="memitem:a91003e0402ae0803eba3acab9e7c1501"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classml__base_1_1_linear_regression.html#a91003e0402ae0803eba3acab9e7c1501">addData</a> (double first_data, double second_data)</td></tr>
 <tr class="separator:a91003e0402ae0803eba3acab9e7c1501"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad51882d8cf494aafc7c7b361112ac52d"><td class="memItemLeft" align="right" valign="top"><a id="ad51882d8cf494aafc7c7b361112ac52d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculate</b> ()</td></tr>
+<tr class="memitem:ad51882d8cf494aafc7c7b361112ac52d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classml__base_1_1_linear_regression.html#ad51882d8cf494aafc7c7b361112ac52d">calculate</a> ()</td></tr>
 <tr class="separator:ad51882d8cf494aafc7c7b361112ac52d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a802bf45486a0c839b04ba68ebb8e2c7b"><td class="memItemLeft" align="right" valign="top"><a id="a802bf45486a0c839b04ba68ebb8e2c7b"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>predicFirstData</b> (double second_data)</td></tr>
+<tr class="memitem:a802bf45486a0c839b04ba68ebb8e2c7b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classml__base_1_1_linear_regression.html#a802bf45486a0c839b04ba68ebb8e2c7b">predicFirstData</a> (double second_data)</td></tr>
 <tr class="separator:a802bf45486a0c839b04ba68ebb8e2c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b3765bfdb5617d35d18951ebbc3ba20"><td class="memItemLeft" align="right" valign="top"><a id="a6b3765bfdb5617d35d18951ebbc3ba20"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>predictSecondData</b> (double first_data)</td></tr>
+<tr class="memitem:a6b3765bfdb5617d35d18951ebbc3ba20"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classml__base_1_1_linear_regression.html#a6b3765bfdb5617d35d18951ebbc3ba20">predictSecondData</a> (double first_data)</td></tr>
 <tr class="separator:a6b3765bfdb5617d35d18951ebbc3ba20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a91003e0402ae0803eba3acab9e7c1501"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ml_base::LinearRegression::addData </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>first_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>second_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adding data to object from parameters </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first_data</td><td>Parameter data. </td></tr>
+    <tr><td class="paramname">second_data</td><td>Parameter data. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a1f630a397a38709878f1107ec52f9e0d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -104,6 +133,66 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>predictSecondData</
 <p>Adding data to object from file </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data_path</td><td>Path to file with data. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad51882d8cf494aafc7c7b361112ac52d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ml_base::LinearRegression::calculate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calculating linear function </p>
+
+</div>
+</div>
+<a id="a802bf45486a0c839b04ba68ebb8e2c7b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ml_base::LinearRegression::predicFirstData </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>second_data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Make an prediction based on second parameter data </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">second_data</td><td>Parameter data. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6b3765bfdb5617d35d18951ebbc3ba20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ml_base::LinearRegression::predictSecondData </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>first_data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Make an prediction based on first parameter data </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first_data</td><td>Parameter data. </td></tr>
   </table>
   </dd>
 </dl>
