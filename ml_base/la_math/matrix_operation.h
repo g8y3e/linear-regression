@@ -1,0 +1,140 @@
+//
+// Created by Valentine.Pavchuk on 6/16/16.
+//
+
+#ifndef ML_LINEAR_REGRESSION_MATRIX_OPERATION_H
+#define ML_LINEAR_REGRESSION_MATRIX_OPERATION_H
+
+#include "matrix.h"
+
+namespace ml_base {
+namespace la_math {
+    template <typename T>
+    Matrix<T> operator+(const Matrix<T>& lhs, const Matrix<T>& rhs) {
+        if (rhs.getRows() != lhs.getRows() || rhs.getColumns() != lhs.getColumns()) {
+            throw MatrixException("Matrix can't add not same dimension matrices!");
+        }
+
+        Matrix<T> result(lhs.getRows(), lhs.getColumns());
+
+        for (size_t j = 0; j < lhs.getColumns(); ++j) {
+            for (size_t i = 0; i < lhs.getRows(); ++i) {
+                result[j][i] = lhs[j][i] + rhs[j][i];
+            }
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    Matrix<T> operator-(const Matrix<T>& lhs, const Matrix<T>& rhs) {
+        if (rhs.getRows() != lhs.getRows() || rhs.getColumns() != lhs.getColumns()) {
+            throw MatrixException("Matrix can't sub not same dimension matrices!");
+        }
+
+        Matrix<T> result(lhs.getRows(), lhs.getColumns());
+
+        for (size_t j = 0; j < lhs.getColumns(); ++j) {
+            for (size_t i = 0; i < lhs.getRows(); ++i) {
+                result[j][i] = lhs[j][i] - rhs[j][i];
+            }
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    Matrix<T> operator*(const Matrix<T>& lhs, const Matrix<T>& rhs) {
+        if (lhs.getColumns() != rhs.getRows()) {
+            throw MatrixException("Matrix can't mult x1.cols != x2.rows matrices!");
+        }
+
+        Matrix<T> result(lhs.getRows(), rhs.getColumns());
+        for (size_t j = 0; j < result.getColumns(); ++j) {
+            for (size_t i = 0; i < result.getRows(); ++i) {
+                for (size_t k = 0; k < lhs.getColumns(); ++k) {
+                    result[j][i] += lhs[k][i] * rhs[j][k];
+                }
+            }
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    Matrix<T> operator/(const Matrix<T>& lhs, const Matrix<T>& rhs) {
+        if (lhs.getColumns() != rhs.getRows()) {
+            throw MatrixException("Matrix can't mult x1.cols != x2.rows matrices!");
+        }
+
+        Matrix<T> result(lhs.getRows(), rhs.getColumns());
+        for (size_t j = 0; j < result.getColumns(); ++j) {
+            for (size_t i = 0; i < result.getRows(); ++i) {
+                for (size_t k = 0; k < lhs.getColumns(); ++k) {
+                    result[j][i] += lhs[k][i] / rhs[j][k];
+                }
+            }
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    Matrix<T> transpose(const Matrix<T>& rhs) {
+        Matrix<T> result(rhs.getColumns(), rhs.getRows());
+
+        for (size_t j = 0; j < rhs.getColumns(); ++j) {
+            for (size_t i = 0; i < rhs.getRows(); ++i) {
+                result[i][j] = rhs[j][i];
+            }
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    T determinant(const Matrix<T>& rhs) {
+        if (rhs.getColumns() != rhs.getRows()) {
+            throw MatrixException("Matrix must have rows == columns for calc determinant!");
+        }
+
+        if (rhs.getColumns() == 2) {
+            return ((rhs[0][0] * rhs[1][1]) - (rhs[0][1] * rhs[1][0]));
+        }
+
+        T result = 0;
+        bool is_minus = false;
+        for (size_t j = 0; j < rhs.getColumns(); ++j) {
+            Matrix<T> minor_matrix(rhs.getRows() - 1, rhs.getColumns() - 1);
+
+            for (size_t minor_j = 0, parent_j = 0; parent_j < rhs.getColumns(); ++parent_j) {
+                if (parent_j == j) {
+                    continue;
+                }
+
+                for (size_t i = 1; i < rhs.getRows(); ++i) {
+                    minor_matrix[minor_j][i - 1] = rhs[parent_j][i];
+                }
+
+                ++minor_j;
+            }
+
+            T column_result = rhs[j][0] * determinant(minor_matrix);
+            result += (is_minus) ? -1 * column_result : column_result;
+
+            is_minus = !is_minus;
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    Matrix<T> inverse(const Matrix<T>& rhs) {
+        // fixme
+    }
+}
+}
+
+
+
+#endif //ML_LINEAR_REGRESSION_MATRIX_OPERATION_H
