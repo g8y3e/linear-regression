@@ -60,5 +60,15 @@ int main(int argc, char **argv) {
     testDet[0][3] = -4;   testDet[1][3] =  3;    testDet[2][3] =  5;    testDet[3][3] = -6;
     int determinantRes2 = determinant(testDet);
 
+    // test inverse
+    ml_base::la_math::Matrix<float> testInverse(2, 2);
+    testInverse[0][0] = 1;   testInverse[1][0] = 4;
+    testInverse[0][1] = 2;   testInverse[1][1] = 5;
+
+    float deterTest2 = determinant(testInverse);
+
+    ml_base::la_math::Matrix<float> resultInverse = inverse(testInverse);
+    ml_base::la_math::Matrix<float> resultInvTest = testInverse * resultInverse;
+
     return 0;
 }

@@ -44,6 +44,43 @@ namespace la_math {
     }
 
     template <typename T>
+    Matrix<T> operator*(const Matrix<T>& lhs, const T& scalar) {
+        Matrix<T> result(lhs.getRows(), lhs.getColumns());
+
+        for (size_t j = 0; j < lhs.getColumns(); ++j) {
+            for (size_t i = 0; i < lhs.getRows(); ++i) {
+                result[j][i] = lhs[j][i] * scalar;
+            }
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    Matrix<T> operator*(const T& scalar, const Matrix<T>& lhs) {
+        return operator*(lhs, scalar);
+    }
+
+    template <typename T>
+    Matrix<T> operator/(const Matrix<T>& lhs, const T& scalar) {
+        Matrix<T> result(lhs.getRows(), lhs.getColumns());
+
+        for (size_t j = 0; j < lhs.getColumns(); ++j) {
+            for (size_t i = 0; i < lhs.getRows(); ++i) {
+                result[j][i] = lhs[j][i] / scalar;
+            }
+        }
+
+        return result;
+    }
+
+    template <typename T>
+    Matrix<T> operator/(const T& scalar, const Matrix<T>& lhs) {
+        return operator/(lhs, scalar);
+    }
+
+
+    template <typename T>
     Matrix<T> operator*(const Matrix<T>& lhs, const Matrix<T>& rhs) {
         if (lhs.getColumns() != rhs.getRows()) {
             throw MatrixException("Matrix can't mult x1.cols != x2.rows matrices!");
@@ -93,6 +130,28 @@ namespace la_math {
     }
 
     template <typename T>
+    Matrix<T> minor(const Matrix<T>& rhs, size_t row_number, size_t col_number) {
+        Matrix<T> result(rhs.getRows() - 1, rhs.getColumns() - 1);
+
+        for (size_t j = 0, parent_j = 0; parent_j < rhs.getColumns(); ++parent_j) {
+            if (parent_j == col_number) {
+                continue;
+            }
+
+            for (size_t i = 0, parent_i = 0; parent_i < rhs.getRows(); ++parent_i) {
+                if (parent_i == row_number) {
+                    continue;
+                }
+
+                result[j][i] = rhs[parent_j][parent_i];
+            }
+            ++j;
+        }
+
+        return result;
+    }
+
+    template <typename T>
     T determinant(const Matrix<T>& rhs) {
         if (rhs.getColumns() != rhs.getRows()) {
             throw MatrixException("Matrix must have rows == columns for calc determinant!");
@@ -102,22 +161,14 @@ namespace la_math {
             return ((rhs[0][0] * rhs[1][1]) - (rhs[0][1] * rhs[1][0]));
         }
 
+        if (rhs.getColumns() == 1) {
+            return rhs[0][0];
+        }
+
         T result = 0;
         bool is_minus = false;
         for (size_t j = 0; j < rhs.getColumns(); ++j) {
-            Matrix<T> minor_matrix(rhs.getRows() - 1, rhs.getColumns() - 1);
-
-            for (size_t minor_j = 0, parent_j = 0; parent_j < rhs.getColumns(); ++parent_j) {
-                if (parent_j == j) {
-                    continue;
-                }
-
-                for (size_t i = 1; i < rhs.getRows(); ++i) {
-                    minor_matrix[minor_j][i - 1] = rhs[parent_j][i];
-                }
-
-                ++minor_j;
-            }
+            Matrix<T> minor_matrix = minor(rhs, j, 0);
 
             T column_result = rhs[j][0] * determinant(minor_matrix);
             result += (is_minus) ? -1 * column_result : column_result;
@@ -129,8 +180,29 @@ namespace la_math {
     }
 
     template <typename T>
+    Matrix<T> cofactor(const Matrix<T>& rhs) {
+        Matrix<T> result(rhs.getRows(), rhs.getColumns());
+
+        bool is_minus = false;
+        bool is_minus_inner = false;
+        for (size_t j = 0; j < rhs.getColumns(); ++j) {
+            is_minus_inner = is_minus;
+            for (size_t i = 0; i < rhs.getRows(); ++i) {
+                Matrix<T> minor_matrix = minor(rhs, i, j);
+
+                T determinant_result = determinant(minor_matrix);
+                result[j][i] = (is_minus_inner) ? -1 * determinant_result: determinant_result;
+                is_minus_inner = !is_minus_inner;
+            }
+            is_minus = !is_minus;
+        }
+
+        return result;
+    }
+
+    template <typename T>
     Matrix<T> inverse(const Matrix<T>& rhs) {
-        // fixme
+        return transpose(cofactor(rhs)) / determinant(rhs);
     }
 }
 }
